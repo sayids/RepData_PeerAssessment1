@@ -1,4 +1,9 @@
-# Reproducible Research: Peer Assessment 1
+---
+title: "Reproducible Research: Peer Assessment 1"
+output: 
+  html_document:
+    keep_md: yes
+---
 
 
 ## Loading and preprocessing the data
@@ -28,11 +33,11 @@ library(dplyr)
 ## 
 ## Attaching package: 'dplyr'
 ## 
-## РЎР»РµРґСѓСЋС‰РёРµ РѕР±СЉРµРєС‚С‹ СЃРєСЂС‹С‚С‹ РѕС‚ 'package:stats':
+## Следующие объекты скрыты от 'package:stats':
 ## 
 ##     filter, lag
 ## 
-## РЎР»РµРґСѓСЋС‰РёРµ РѕР±СЉРµРєС‚С‹ СЃРєСЂС‹С‚С‹ РѕС‚ 'package:base':
+## Следующие объекты скрыты от 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union
 ```
@@ -81,7 +86,7 @@ activity <- summarize(data, total_steps = sum(steps, na.rm=TRUE))
 hist(activity$total_steps, breaks=20, col="green", main="Number of steps per day", xlab="Steps per day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
 
 3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -112,7 +117,7 @@ interval_plot <- summarize(data, activity = mean(steps, na.rm=TRUE))
 plot(interval_plot, type = "l")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-5-1.png) 
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png) 
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -161,7 +166,7 @@ filled <- summarize(data, total_steps = sum(steps, na.rm=TRUE))
 hist(filled$total_steps, breaks=20, col = "blue", main = "Number of steps per day", xlab = "Steps per day")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-9-1.png) 
+![plot of chunk unnamed-chunk-9](figure/unnamed-chunk-9-1.png) 
 
 ```r
 mean(filled$total_steps)
@@ -191,17 +196,17 @@ data$date <- as.Date(data$date)
 data <- mutate(data, weekdays = weekdays(data$date))
 ```
 
-1. Create a new factor variable in the dataset with two levels вЂ“ вЂњweekdayвЂќ and вЂњweekendвЂќ indicating whether a given date is a weekday or weekend day.
+1. Create a new factor variable in the dataset with two levels – “weekday” and “weekend” indicating whether a given date is a weekday or weekend day.
 
 
 ```r
-data$weekdays[data$weekdays=="РїРѕРЅРµРґРµР»СЊРЅРёРє"]<-"Weekday"
-data$weekdays[data$weekdays=="РІС‚РѕСЂРЅРёРє"]<-"Weekday"
-data$weekdays[data$weekdays=="СЃСЂРµРґР°"]<-"Weekday"
-data$weekdays[data$weekdays=="С‡РµС‚РІРµСЂРі"]<-"Weekday"
-data$weekdays[data$weekdays=="РїСЏС‚РЅРёС†Р°"]<-"Weekday"
-data$weekdays[data$weekdays=="СЃСѓР±Р±РѕС‚Р°"]<-"Weekend"
-data$weekdays[data$weekdays=="РІРѕСЃРєСЂРµСЃРµРЅСЊРµ"]<-"Weekend"
+data$weekdays[data$weekdays=="понедельник"]<-"Weekday"
+data$weekdays[data$weekdays=="вторник"]<-"Weekday"
+data$weekdays[data$weekdays=="среда"]<-"Weekday"
+data$weekdays[data$weekdays=="четверг"]<-"Weekday"
+data$weekdays[data$weekdays=="пятница"]<-"Weekday"
+data$weekdays[data$weekdays=="суббота"]<-"Weekend"
+data$weekdays[data$weekdays=="воскресенье"]<-"Weekend"
 data <- group_by(data, interval, weekdays)
 ```
 
@@ -223,4 +228,4 @@ plot(summary_weekday, type="l", main="Weekday")
 plot(summary_weekend, type="l", main="Weekend")
 ```
 
-![](PA1_template_files/figure-html/unnamed-chunk-12-1.png) 
+![plot of chunk unnamed-chunk-12](figure/unnamed-chunk-12-1.png) 
